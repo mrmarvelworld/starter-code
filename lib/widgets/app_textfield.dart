@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:vte_starter_codes/core/extensions/context.dart';
-import 'package:vte_starter_codes/core/utils/colors.dart';
-import 'package:vte_starter_codes/core/utils/textstyles.dart';
+import 'package:starter_codes/core/extensions/context.dart';
+import 'package:starter_codes/core/utils/colors.dart';
+import 'package:starter_codes/core/utils/textstyles.dart';
 
 class AppTextField extends StatefulWidget {
   final String? text;
