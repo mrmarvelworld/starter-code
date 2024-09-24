@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter_codes/core/router/router.dart';
 
 class NavigationService {
   static NavigationService get instance => _instance;
@@ -6,29 +7,30 @@ class NavigationService {
   NavigationService._();
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  // stack a new view
-  Future<dynamic> navigateTo(String routeName, {Object? argument}) {
-    return navigatorKey.currentState!.pushNamed(routeName, arguments: argument);
+
+  // Navigate with a custom transition
+  Future<dynamic> navigateTo(String routeName,
+      {Object? argument, TransitionType transition = TransitionType.Side}) {
+    return navigatorKey.currentState!.push(
+      AppRouter.generateRoute(
+        RouteSettings(name: routeName, arguments: argument),
+        transition: transition,
+      ),
+    );
   }
 
-  // remove current view and stack new one
-  Future<dynamic> navigateToReplace(String routeName, {Object? argument}) {
-    return navigatorKey.currentState!
-        .pushReplacementNamed(routeName, arguments: argument);
+  // Replace current view and stack new one with custom transition
+  Future<dynamic> navigateToReplace(String routeName,
+      {Object? argument, TransitionType transition = TransitionType.Side}) {
+    return navigatorKey.currentState!.pushReplacement(
+      AppRouter.generateRoute(
+        RouteSettings(name: routeName, arguments: argument),
+        transition: transition,
+      ),
+    );
   }
 
-  // remove current view and stack new one
-  Future<dynamic> navigateToReplaceAll(String routeName, {Object? argument}) {
-    return navigatorKey.currentState!
-        .pushReplacementNamed(routeName, arguments: argument);
-  }
-
-  Future<dynamic> logOut(String routeName, {Object? argument}) {
-    // navigatorKey.currentState.
-    return navigatorKey.currentState!
-        .pushReplacementNamed(routeName, arguments: argument);
-  }
-
+  // Navigate back
   void goBack<T extends Object?>([T? result]) {
     Navigator.of(navigatorKey.currentState!.context).pop(result);
   }
